@@ -1,0 +1,19 @@
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\bin\Debug\net6.0-windows\Connect 4 Game.exe
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\bin\Debug\net6.0-windows\Connect 4 Game.deps.json
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\bin\Debug\net6.0-windows\Connect 4 Game.runtimeconfig.json
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\bin\Debug\net6.0-windows\Connect 4 Game.dll
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\bin\Debug\net6.0-windows\ref\Connect 4 Game.dll
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\bin\Debug\net6.0-windows\Connect 4 Game.pdb
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect4.baml
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect4.g.cs
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game_MarkupCompile.cache
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.g.resources
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.AssemblyInfoInputs.cache
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.AssemblyInfo.cs
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.csproj.CoreCompileInputs.cache
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.dll
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\ref\Connect 4 Game.dll
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.pdb
+C:\Users\KageN\Documents\VS22 Projects\connect4\WPFUI\obj\Debug\net6.0-windows\Connect 4 Game.genruntimeconfig.cache

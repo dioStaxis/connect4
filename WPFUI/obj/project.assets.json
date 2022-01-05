@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KageN\\Documents\\VS22 Projects\\connect4\\WPFUI\\WPFUI.csproj",
-      "projectName": "WPFUI",
-      "projectPath": "C:\\Users\\KageN\\Documents\\VS22 Projects\\connect4\\WPFUI\\WPFUI.csproj",
+      "projectUniqueName": "C:\\Users\\KageN\\Documents\\VS22 Projects\\connect4\\WPFUI\\Connect 4 Game.csproj",
+      "projectName": "Connect 4 Game",
+      "projectPath": "C:\\Users\\KageN\\Documents\\VS22 Projects\\connect4\\WPFUI\\Connect 4 Game.csproj",
       "packagesPath": "C:\\Users\\KageN\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\KageN\\Documents\\VS22 Projects\\connect4\\WPFUI\\obj\\",
       "projectStyle": "PackageReference",

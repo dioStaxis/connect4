@@ -9,14 +9,13 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 
-namespace WPFUI
+namespace Connect4Game
 {
     /// <summary>
     /// A game of Connect 4
     /// </summary>
     public partial class C4GW : Window
     {
-
         //Player 1 is true, player 2 is false
         public bool Player { get; set; }
         private readonly ObservableCollection<ObservableCollection<int>> backBoard = new();
@@ -28,27 +27,64 @@ namespace WPFUI
             UpdateContext();
         }
 
+        public string PlayerAsString()
+        {
+            if (Player)
+                return "1";
+            else
+                return "2";
+        }
+
         public void UpdateContext()
         {
             DataContext = Player;
         }
 
-        public string PlayerAsString()
-        {
-            if (Player)
-                return "1";
-            else 
-                return "2";
-        }
-
         public void SetBackBoard(int row, int column, int value)
-        { 
+        {
             backBoard[row][column] = value;
         }
 
         public int GetBackBoard(int row, int col)
         {
             return backBoard[row][col];
+        }
+
+        private static int GetColumn(int num)
+        {
+            return num % 10;
+        }
+
+        public bool CheckEmpty(int row, int column)
+        {
+            if (backBoard[row][column].Equals(0))
+                return true;
+            else 
+                return false;
+        }
+
+        public bool TakeLowest(int column, bool player1)
+        {
+            for (int row = backBoard.Count - 1; row >= 0; row--)
+            {
+                if (CheckEmpty(row, column))
+                {
+                    if (player1)
+                        SetBackBoard(row, column, 1);
+                    else
+                        SetBackBoard(row, column, 2);
+
+                    if (CheckWin(backBoard, Player, row, column))
+                        GameOver();
+                    else if (CheckFull())
+                        BoardFull();
+                    else                    
+                        ChangePlayer();
+
+                    return true;
+                }
+            }
+            return false;
         }
 
         public C4GW()
@@ -71,17 +107,26 @@ namespace WPFUI
             UpdateContext();
         }
 
-        public void ResetGame()
+        private void ButtonClickEvent(object sender, RoutedEventArgs e)
         {
-            for (int row = 0; row < 6; row++)
-            {
-                for (int column = 0; column < 7; column++)
-                {
-                    SetBackBoard(row,column,0);
-                }
-            }
-            Player = true;
-            UpdateContext();
+            int location = (int)((Button)sender).Tag;
+            int column = GetColumn(location);
+            TakeLowest(column, Player);
+        }
+
+        private void SaveClickEvent(object sender, RoutedEventArgs e)
+        {
+            SaveGame();
+        }
+
+        private void LoadClickEvent(object sender, RoutedEventArgs e)
+        {
+            LoadGame();
+        }
+
+        private void ResetClickEvent(object sender, RoutedEventArgs e)
+        {
+            ResetGame();
         }
 
         public void SaveGame()
@@ -107,8 +152,8 @@ namespace WPFUI
         {
             using (StreamReader sr = new StreamReader(".\\savegame.txt"))
             {
-                int local = sr.Read();
-                if (local == 48)
+                int firstVal = sr.Read();
+                if (firstVal == 48)
                     Player = true;
                 else
                     Player = false;
@@ -117,17 +162,30 @@ namespace WPFUI
                 {
                     for (int column = 0; column < 7; column++)
                     {    
-                        int temp = sr.Read();
-                        if(temp == 48)
+                        int nextVal = sr.Read();
+                        if(nextVal == 48)
                             SetBackBoard(row, column, 0);
-                        else if(temp == 49)
+                        else if(nextVal == 49)
                             SetBackBoard(row, column, 1);
-                        else if(temp == 50)
+                        else if(nextVal == 50)
                             SetBackBoard(row, column, 2);
                     }
                 }
                 sr.Close();
             }
+        }
+
+        public void ResetGame()
+        {
+            for (int row = 0; row < 6; row++)
+            {
+                for (int column = 0; column < 7; column++)
+                {
+                    SetBackBoard(row,column,0);
+                }
+            }
+            Player = true;
+            UpdateContext();
         }
 
         public void GameOver()
@@ -147,7 +205,7 @@ namespace WPFUI
             return (!CheckEmpty(0, 0) && !CheckEmpty(0, 1) && !CheckEmpty(0, 2) && !CheckEmpty(0, 3) && !CheckEmpty(0, 4) && !CheckEmpty(0, 5) && !CheckEmpty(0, 6));
         }
 
-        public bool CheckWin(ObservableCollection<ObservableCollection<int>> backBoard, bool player, int row, int column)
+        public static bool CheckWin(ObservableCollection<ObservableCollection<int>> backBoard, bool player, int row, int column)
         {
             int value;
             if (player)
@@ -196,12 +254,12 @@ namespace WPFUI
                 if ((backBoard[row - 3][column + 3] == value) && (backBoard[row - 2][column + 2] == value) && (backBoard[row - 1][column + 1] == value))
                     return true;
                 
-            //check northeast +2, southwest +2
+            //check northeast +2, southwest +1
             if (row >= 2 && row <= 4 && column >= 1 && column <= 4)
                 if ((backBoard[row - 2][column + 2] == value) && (backBoard[row - 1][column + 1] == value) && (backBoard[row + 1][column - 1] == value))
                     return true;
                 
-            //check northeast +1, southwest +1
+            //check northeast +1, southwest +2
             if (row >= 1 && row <= 3 && column >= 2 && column <= 5)
                 if ((backBoard[row - 1][column + 1] == value) && (backBoard[row + 1][column - 1] == value) && (backBoard[row + 2][column - 2] == value))
                     return true;
@@ -265,63 +323,6 @@ namespace WPFUI
             return false;
         }
 
-        private static int GetColumn(int num)
-        {
-            return num % 10;
-        }
 
-        public bool CheckEmpty(int row, int column)
-        {
-            if (backBoard[row][column].Equals(0))
-                return true;
-            else 
-                return false;
-        }
-
-        public bool TakeLowest(int column, bool player1)
-        {
-            for (int row = backBoard.Count - 1; row >= 0; row--)
-            {
-                if (CheckEmpty(row, column))
-                {
-                    if (player1)
-                        SetBackBoard(row, column, 1);
-                    else
-                        SetBackBoard(row, column, 2);
-
-                    if (CheckWin(backBoard, Player, row, column))
-                        GameOver();
-                    else if (CheckFull())
-                        BoardFull();
-                    else                    
-                        ChangePlayer();
-
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void ButtonClickEvent(object sender, RoutedEventArgs e)
-        {
-            int location = (int)((Button)sender).Tag;
-            int column = GetColumn(location);
-            TakeLowest(column, Player);
-        }
-
-        private void SaveClickEvent(object sender, RoutedEventArgs e)
-        {
-            SaveGame();
-        }
-
-        private void LoadClickEvent(object sender, RoutedEventArgs e)
-        {
-            LoadGame();
-        }
-
-        private void ResetClickEvent(object sender, RoutedEventArgs e)
-        {
-            ResetGame();
-        }
     }
 }
