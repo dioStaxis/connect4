@@ -322,7 +322,5 @@ namespace Connect4Game
                 
             return false;
         }
-
-
     }
 }
